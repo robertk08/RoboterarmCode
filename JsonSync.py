@@ -1,14 +1,7 @@
+from dataclasses import asdict
 import json
 import requests
-from dataclasses import dataclass, asdict
-from typing import List, Optional
-
-# Equivalent to your ControlCommand struct
-@dataclass
-class ControlCommand:
-    device: str
-    action: int
-    values: Optional[List[List[int]]] = None
+from ControlCommand import ControlCommand
 
 class ConnectionService:
     @staticmethod
@@ -20,11 +13,9 @@ class ConnectionService:
         print(f"Request JSON: {json_data}")
 
         try:
-            response = requests.post(url, headers={"Content-Type": "application/json"}, data=json_data)
-            print(f"Response Status Code: {response.status_code}")
-            print(f"Response Data: {response.text}")
-        except requests.RequestException as e:
-            print(f"Request failed: {e}")
+            requests.post(url, headers={"Content-Type": "application/json"}, data=json_data, timeout=2)
+        except requests.exceptions.RequestException:
+            pass
 
 # Example usage:
 # cmd = ControlCommand(device="LED", action=1, values=[[255, 0, 0]])
