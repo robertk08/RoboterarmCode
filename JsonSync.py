@@ -10,4 +10,4 @@ payload = {
     "key": "value"
 }
 
-response = requests.post("https://example/control", data=json.dumps(payload), headers=headers)
+response = requests.post("https://192.168.4.1/control", data=json.dumps(payload), headers=headers)
