@@ -1,12 +1,13 @@
+import json
 import requests
 
-url = "https://example.com/api"
-data = {
-    "name": "Alice",
-    "age": 30
+headers = {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer dein_token"
 }
 
-response = requests.post(url, json=data)  # `json=` konvertiert automatisch zu JSON
+payload = {
+    "key": "value"
+}
 
-print("Status:", response.status_code)
-print("Antwort:", response.text)
+response = requests.post("https://example/control", data=json.dumps(payload), headers=headers)
